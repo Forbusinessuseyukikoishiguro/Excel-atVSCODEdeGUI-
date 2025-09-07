@@ -1,0 +1,33 @@
+# Excel対応クイズアプリ - クイックセットアップ
+
+## すぐに使い始める方法
+
+### ステップ1: 仮想環境の有効化
+```bash
+# Windows PowerShell
+venv\Scripts\Activate.ps1
+
+# 成功すると (venv) が表示される
+(venv) PS C:\Users\yukik\Desktop\excel>
+```
+
+### ステップ2: アプリ起動
+```bash
+(venv) python quiz.py
+```
+
+### ステップ3: サンプル問題でテスト
+1. 「サンプル問題読み込み」をクリック
+2. 「クイズ開始」をクリック
+3. 問題を解く
+
+### ファイルの確認
+```bash
+# 現在のファイル確認
+ls
+
+# requirements.txtの内容確認
+Get-Content requirements.txt
+```
+
+これであなたのExcel対応クイズアプリは完全にセットアップされました！
