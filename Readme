@@ -1,0 +1,295 @@
+# Excel対応クイズアプリ
+
+Excel・PDF対応のクイズ管理システムです。直感的なGUIでクイズの作成、実行、結果管理ができます。
+
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Mac%20%7C%20Linux-lightgrey.svg)
+
+## 🌟 主な機能
+
+### 📊 Excel連携機能
+- **詳細設定読み込み**: ファイルパス、シート、列を自由に指定
+- **簡単読み込み**: デフォルト設定で即座にファイル読み込み
+- **サンプルExcel作成**: テンプレートファイルの自動生成
+- **結果のExcel出力**: クイズ結果を詳細なExcelファイルで保存
+
+### 🎯 クイズ機能
+- **長文問題対応**: スクロール可能な問題文表示
+- **柔軟な選択肢**: 2-6個の選択肢に対応
+- **リアルタイム進捗**: 問題数・正解数の表示
+- **即座のフィードバック**: 正解・不正解の即時表示
+
+### 📈 結果分析
+- **正解率計算**: 自動的な成績計算
+- **詳細結果表示**: 問題別の回答履歴
+- **評価コメント**: 成績に応じたメッセージ
+- **Excel結果保存**: 分析用データの出力
+
+### 🛡️ 安全性・信頼性
+- **強化された例外処理**: 予期しないエラーへの対応
+- **詳細ログ機能**: タイムスタンプ付きの操作履歴
+- **ファイル検証**: サイズ・形式・内容の自動チェック
+- **データ検証**: 空データ・型エラーの詳細チェック
+
+## 🚀 インストール
+
+### 前提条件
+- Python 3.8以上
+- Windows/Mac/Linux対応
+
+### 1. プロジェクトのダウンロード
+```bash
+# GitHubからクローンする場合
+git clone <repository-url>
+cd excel_quiz_app
+
+# または、ZIPファイルをダウンロードして展開
+```
+
+### 2. 仮想環境の作成と有効化
+
+#### Windows PowerShell
+```bash
+# 仮想環境を作成
+python -m venv venv
+
+# 仮想環境を有効化
+venv\Scripts\Activate.ps1
+
+# 有効化の確認（プロンプトに(venv)が表示される）
+# (venv) PS C:\path\to\project>
+```
+
+#### Windows Command Prompt
+```bash
+# 仮想環境を作成
+python -m venv venv
+
+# 仮想環境を有効化
+venv\Scripts\activate.bat
+```
+
+#### Linux/Mac
+```bash
+# 仮想環境を作成
+python3 -m venv venv
+
+# 仮想環境を有効化
+source venv/bin/activate
+```
+
+### 3. 依存関係のインストール
+```bash
+# requirements.txtから一括インストール
+(venv) pip install -r requirements.txt
+
+# または手動インストール
+(venv) pip install pandas openpyxl
+```
+
+### 4. アプリケーションの実行
+```bash
+(venv) python quiz.py
+```
+
+## 📋 Requirements
+
+このプロジェクトで使用されているパッケージ：
+
+```text
+cffi==1.17.1
+charset-normalizer==3.4.3
+cryptography==45.0.7
+et_xmlfile==2.0.0
+numpy==2.3.2
+openpyxl==3.1.5
+pandas==2.3.2
+pdfminer.six==20250506
+pdfplumber==0.11.7
+pillow==11.3.0
+pycparser==2.22
+pypdfium2==4.30.0
+python-dateutil==2.9.0.post0
+pytz==2025.2
+six==1.17.0
+tzdata==2025.2
+```
+
+## 📁 プロジェクト構成
+
+```
+excel_quiz_app/
+├── venv/                    # 仮想環境
+├── quiz.py                  # メインプログラム
+├── pdf_converter.py         # PDF変換ツール（別機能）
+├── requirements.txt         # 依存関係
+├── README.md               # このファイル
+└── .gitignore              # Git除外設定
+```
+
+## 🎮 使用方法
+
+### 基本的な使い方
+
+1. **アプリケーションを起動**
+   ```bash
+   (venv) python quiz.py
+   ```
+
+2. **問題の読み込み**
+   - **サンプル問題**: 即座に5問のサンプル問題を読み込み
+   - **簡単Excel読み込み**: デフォルト設定でExcelファイルを読み込み
+   - **詳細Excel読み込み**: ファイルパス、シート、列を指定して読み込み
+
+3. **クイズの実行**
+   - 「クイズ開始」ボタンをクリック
+   - 問題を読んで選択肢を選択
+   - 「回答する」で回答を提出
+   - 「次の問題」で進行
+
+4. **結果の確認**
+   - 自動的に結果タブに切り替わり
+   - 正解率と詳細結果を表示
+   - 必要に応じてExcelファイルに保存
+
+### Excelファイルの形式
+
+| 列 | 内容 | 例 |
+|---|---|---|
+| A | 問題文 | 日本の首都はどこでしょうか？ |
+| B | 選択肢1 | 大阪 |
+| C | 選択肢2 | 東京 |
+| D | 選択肢3 | 京都 |
+| E | 選択肢4 | 横浜 |
+| F | 正解番号 | 2 |
+
+### 詳細設定でのExcel読み込み
+
+「Excel詳細設定読み込み」を使用すると：
+
+- **ファイルパス**: 直接入力または参照ボタンで選択
+- **シート指定**: 名前または番号（0から開始）で指定
+- **列設定**: 問題文、選択肢、正解列を自由に設定
+- **シート一覧**: ファイルから利用可能なシートを取得
+
+## 🔧 トラブルシューティング
+
+### 仮想環境の問題
+
+#### PowerShellで実行ポリシーエラー
+```bash
+# エラー: このシステムではスクリプトの実行が無効になっています
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+#### 仮想環境が有効化されない
+```bash
+# 絶対パスで指定
+C:\Users\username\Desktop\excel\venv\Scripts\Activate.ps1
+```
+
+### アプリケーションの問題
+
+#### ライブラリエラー
+```bash
+# pandasまたはopenpyxlがない場合
+(venv) pip install pandas openpyxl
+```
+
+#### Excelファイルが読み込めない
+- ファイルパスが正しいか確認
+- ファイルが他のアプリケーションで開かれていないか確認
+- ログタブで詳細なエラー情報を確認
+
+#### 文字化けが発生する
+- Excelファイルの文字エンコーディングを確認
+- UTF-8で保存し直してみる
+
+### パフォーマンスの問題
+
+#### 大きなファイルの処理
+- 50MB以上のファイルでは確認ダイアログが表示されます
+- 必要に応じてファイルを分割してください
+
+## 🎯 使用例
+
+### 教育機関での活用
+- 授業の理解度チェック
+- 定期テストの作成と実施
+- 学習進捗の管理
+
+### 企業研修での活用
+- 研修効果の測定
+- 資格試験の対策
+- 新人教育プログラム
+
+### 個人学習での活用
+- 自習用問題集の作成
+- 復習用クイズの実施
+- 学習記録の管理
+
+## 🔄 バージョン管理
+
+### 他の環境でのセットアップ
+
+1. **プロジェクトをコピー**
+2. **仮想環境を作成**
+   ```bash
+   python -m venv venv
+   ```
+3. **仮想環境を有効化**
+   ```bash
+   # Windows
+   venv\Scripts\Activate.ps1
+   
+   # Linux/Mac
+   source venv/bin/activate
+   ```
+4. **依存関係をインストール**
+   ```bash
+   (venv) pip install -r requirements.txt
+   ```
+
+### requirements.txtの更新
+
+新しいパッケージを追加した場合：
+```bash
+(venv) pip freeze > requirements.txt
+```
+
+## 📝 ライセンス
+
+このプロジェクトはMITライセンスの下で公開されています。
+
+## 🤝 貢献
+
+プロジェクトへの貢献を歓迎します：
+
+1. フォークしてください
+2. 新しいブランチを作成してください (`git checkout -b feature/amazing-feature`)
+3. 変更をコミットしてください (`git commit -m 'Add some amazing feature'`)
+4. ブランチにプッシュしてください (`git push origin feature/amazing-feature`)
+5. プルリクエストを開いてください
+
+## 📞 サポート
+
+問題が発生した場合：
+
+1. **ログタブを確認**: 詳細なエラー情報を確認
+2. **requirements.txtを確認**: 依存関係が正しくインストールされているか確認
+3. **仮想環境を再作成**: 環境をクリーンな状態に戻す
+
+## 📚 参考資料
+
+- [Python仮想環境ガイド](https://docs.python.org/3/tutorial/venv.html)
+- [pandas公式ドキュメント](https://pandas.pydata.org/docs/)
+- [openpyxl公式ドキュメント](https://openpyxl.readthedocs.io/)
+
+---
+
+**最終更新**: 2025年1月
+
+**開発環境**: Python 3.11, Windows 10/11
+
+**テスト済み環境**: Windows PowerShell, Command Prompt
