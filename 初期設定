@@ -1,0 +1,33 @@
+# Excel Quiz App Requirements
+# Excel対応クイズアプリの必要なパッケージ
+
+# データ処理・Excel操作
+pandas==2.3.2
+openpyxl==3.1.5
+numpy==2.3.2
+
+# 日付処理
+python-dateutil==2.9.0.post0
+pytz==2025.2
+
+# Excel関連の依存関係
+et-xmlfile==2.0.0
+
+# 基本的なユーティリティ
+six==1.16.0
+
+# 画像処理（将来的な拡張用）
+pillow==11.3.0
+
+# PDF処理（将来的な拡張用、現在は使用していませんがインストール済み）
+pdfminer.six==20250506
+pdfplumber==0.11.7
+pypdfium2==4.30.0
+
+# 暗号化関連（依存関係）
+cffi==1.17.1
+pycparser==2.22
+cryptography==45.0.7
+charset-normalizer==3.4.3
+
+# 注意: tkinterは標準ライブラリなので requirements.txt には含まれません
