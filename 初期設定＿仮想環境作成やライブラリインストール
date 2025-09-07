@@ -1,0 +1,323 @@
+# Excel対応クイズアプリ - インストールガイド
+
+## 新しい環境でのセットアップ方法
+
+### 1. プロジェクトファイルの準備
+
+```bash
+# プロジェクトフォルダを作成
+mkdir excel_quiz_app
+cd excel_quiz_app
+
+# 以下のファイルを配置
+# - quiz.py
+# - requirements.txt
+# - README.md
+```
+
+### 2. 仮想環境の作成
+
+#### Windows PowerShell
+```bash
+# 仮想環境を作成
+python -m venv venv
+
+# 仮想環境を有効化
+venv\Scripts\Activate.ps1
+
+# 有効化確認（(venv)が表示される）
+# (venv) PS C:\path\to\project>
+```
+
+#### Windows Command Prompt
+```bash
+python -m venv venv
+venv\Scripts\activate.bat
+```
+
+#### Linux/Mac
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. 依存関係のインストール
+
+#### requirements.txtファイルを作成
+以下の内容でrequirements.txtファイルを作成：
+
+```text
+cffi==1.17.1
+charset-normalizer==3.4.3
+cryptography==45.0.7
+et_xmlfile==2.0.0
+numpy==2.3.2
+openpyxl==3.1.5
+pandas==2.3.2
+pdfminer.six==20250506
+pdfplumber==0.11.7
+pillow==11.3.0
+pycparser==2.22
+pypdfium2==4.30.0
+python-dateutil==2.9.0.post0
+pytz==2025.2
+six==1.17.0
+tzdata==2025.2
+```
+
+#### パッケージをインストール
+```bash
+# requirements.txtから一括インストール
+(venv) pip install -r requirements.txt
+
+# または手動で最小限のパッケージをインストール
+(venv) pip install pandas openpyxl
+```
+
+### 4. インストール確認
+
+```bash
+# インストール済みパッケージを確認
+(venv) pip list
+
+# アプリケーションを起動してテスト
+(venv) python quiz.py
+```
+
+## インストールオプション
+
+### 最小限のインストール（推奨）
+
+Excel対応クイズアプリの基本機能のみが必要な場合：
+
+```bash
+(venv) pip install pandas openpyxl
+```
+
+これで以下の機能が利用可能：
+- Excelファイルの読み込み
+- クイズの実行
+- 結果のExcel保存
+
+### 完全インストール
+
+PDF処理やその他の機能も含めた完全版：
+
+```bash
+(venv) pip install -r requirements.txt
+```
+
+## 各パッケージの説明
+
+### 必須パッケージ
+- **pandas** (2.3.2): データ処理・Excel操作
+- **openpyxl** (3.1.5): Excel形式の読み書き
+- **numpy** (2.3.2): 数値計算（pandasの依存関係）
+
+### 自動的にインストールされる依存関係
+- **et_xmlfile** (2.0.0): openpyxlの依存関係
+- **python-dateutil** (2.9.0.post0): 日付処理
+- **pytz** (2025.2): タイムゾーン処理
+- **six** (1.17.0): Python 2/3互換性
+- **tzdata** (2025.2): タイムゾーンデータ
+
+### PDF関連パッケージ（オプション）
+- **pdfminer.six** (20250506): PDF解析
+- **pdfplumber** (0.11.7): PDF処理
+- **pypdfium2** (4.30.0): PDF描画
+
+### その他
+- **pillow** (11.3.0): 画像処理
+- **cryptography** (45.0.7): 暗号化機能
+- **cffi** (1.17.1): C言語拡張バインディング
+- **charset-normalizer** (3.4.3): 文字エンコーディング
+- **pycparser** (2.22): C言語パーサー
+
+## トラブルシューティング
+
+### PowerShell実行ポリシーエラー
+```bash
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+### pip のアップグレード
+```bash
+(venv) python -m pip install --upgrade pip
+```
+
+### 特定パッケージのインストールエラー
+```bash
+# キャッシュをクリアして再インストール
+(venv) pip install --no-cache-dir package_name
+
+# 信頼できるホストを指定
+(venv) pip install --trusted-host pypi.org --trusted-host pypi.python.org package_name
+```
+
+### 仮想環境のリセット
+```bash
+# 仮想環境を削除
+deactivate
+rmdir /s venv  # Windows
+rm -rf venv    # Linux/Mac
+
+# 新しい仮想環境を作成
+python -m venv venv
+venv\Scripts\Activate.ps1  # Windows
+source venv/bin/activate   # Linux/Mac
+
+# 依存関係を再インストール
+pip install -r requirements.txt
+```
+
+## 他の環境への配布
+
+### プロジェクトの共有手順
+
+1. **必要ファイルの準備**
+   ```
+   project/
+   ├── quiz.py
+   ├── requirements.txt
+   ├── README.md
+   └── .gitignore
+   ```
+
+2. **受け取り側の手順**
+   ```bash
+   # プロジェクトをダウンロード
+   # 仮想環境を作成
+   python -m venv venv
+   
+   # 仮想環境を有効化
+   venv\Scripts\Activate.ps1  # Windows
+   source venv/bin/activate   # Linux/Mac
+   
+   # 依存関係をインストール
+   pip install -r requirements.txt
+   
+   # アプリケーション実行
+   python quiz.py
+   ```
+
+## 開発環境の推奨設定
+
+### VS Code拡張機能
+- Python
+- Python Docstring Generator
+- autoDocstring
+
+### PyCharm設定
+1. File → Settings → Project → Python Interpreter
+2. Add Interpreter → Existing Environment
+3. 仮想環境のpython.exeを選択
+
+## システム要件
+
+### 最小要件
+- Python 3.8以上
+- RAM: 512MB以上
+- ディスク容量: 500MB以上
+
+### 推奨環境
+- Python 3.9以上
+- RAM: 2GB以上
+- ディスク容量: 1GB以上
+- SSD推奨（起動速度向上）
+
+
+
+ーーーーーーーーーーーーーーーーーー
+
+
+# Excel対応クイズアプリ - ステップバイステップ インストール
+
+# === ステップ1: プロジェクトディレクトリ作成 ===
+mkdir excel_quiz_app
+cd excel_quiz_app
+
+# === ステップ2: 仮想環境作成（Windows PowerShell） ===
+python -m venv venv
+
+# === ステップ3: 仮想環境有効化 ===
+venv\Scripts\Activate.ps1
+
+# 確認: プロンプトに (venv) が表示される
+# (venv) PS C:\path\to\project>
+
+# === ステップ4: pipアップデート ===
+python -m pip install --upgrade pip
+
+# === ステップ5: requirements.txt作成 ===
+# 以下の内容でファイルを作成:
+echo "cffi==1.17.1" > requirements.txt
+echo "charset-normalizer==3.4.3" >> requirements.txt
+echo "cryptography==45.0.7" >> requirements.txt
+echo "et_xmlfile==2.0.0" >> requirements.txt
+echo "numpy==2.3.2" >> requirements.txt
+echo "openpyxl==3.1.5" >> requirements.txt
+echo "pandas==2.3.2" >> requirements.txt
+echo "pdfminer.six==20250506" >> requirements.txt
+echo "pdfplumber==0.11.7" >> requirements.txt
+echo "pillow==11.3.0" >> requirements.txt
+echo "pycparser==2.22" >> requirements.txt
+echo "pypdfium2==4.30.0" >> requirements.txt
+echo "python-dateutil==2.9.0.post0" >> requirements.txt
+echo "pytz==2025.2" >> requirements.txt
+echo "six==1.17.0" >> requirements.txt
+echo "tzdata==2025.2" >> requirements.txt
+
+# === ステップ6: 依存関係インストール ===
+pip install -r requirements.txt
+
+# === ステップ7: インストール確認 ===
+pip list
+
+# === ステップ8: アプリケーション実行 ===
+python quiz.py
+
+# === 最小限インストール（推奨） ===
+# 基本機能のみが必要な場合:
+pip install pandas openpyxl
+
+# === トラブルシューティング用コマンド ===
+
+# PowerShell実行ポリシー設定
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# キャッシュクリアして再インストール
+pip install --no-cache-dir -r requirements.txt
+
+# 仮想環境リセット
+deactivate
+rmdir /s venv
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# === 開発用コマンド ===
+
+# 新しいパッケージ追加後
+pip freeze > requirements.txt
+
+# プロジェクト構成確認
+dir
+# または
+ls
+
+# ファイル内容確認
+type requirements.txt
+# または
+Get-Content requirements.txt
+
+# === Linux/Mac用コマンド ===
+
+# 仮想環境作成・有効化
+python3 -m venv venv
+source venv/bin/activate
+
+# 仮想環境リセット
+deactivate
+rm -rf venv
+python3 -m venv venv
+source venv/bin/activate
